@@ -89,7 +89,9 @@ PolSARpro (Polarimetric SAR Data Processing and Educational Tool) is used for pr
 
 ## Step 2: Bulk Download of Sentinel-1 SLC Images
 
-Sentinel-1 SLC images were acquired using the Alaska Satellite Facility Data Search platform. To access and download the data, users need an Earth Data account and a username. Bulk download instructions can be found at [ASF Bulk Data Download Options](https://asf.alaska.edu/how-to/data-tools/asf-bulk-data-download-options/).
+***Python script used to download the images for this test study is available within the 's1_slc_files' folder.***  
+
+Sentinel-1 SLC images were acquired using the Alaska Satellite Facility Data Search platform. To access and download the data, users need an Earth Data account and a username. Bulk download instructions can be found at [ASF Bulk Data Download Options](https://asf.alaska.edu/how-to/data-tools/asf-bulk-data-download-options/). Move all the S1 SLC files to 's1_slc_files' folder for seamless computation.
 
 The imagery collection duration was set from June 10, 2021, to July 30, 2021. Level 1 Single Look Complex (SLC) products were downloaded for the selected area defined by the coordinates (-106.8065, 52.3786, -106.6559, 52.3786, -106.6559, 52.4801, -106.8065, 52.4801, -106.8065, 52.3786). The S1-SLC products were obtained using the on-demand service from the Alaska Satellite Facility Vertex platform. After filtering, a total of 9 images were selected. To easily download the images, download the Python script for bulk download and run it from the command line.
 
