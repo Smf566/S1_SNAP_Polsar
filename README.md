@@ -179,7 +179,11 @@ The .hdr file output from the SNAP process contains the geospatial information f
 
 ## References
 
-(Include any references here)
+- ARSET. (2022). Mapping Crops and their Biophysical Characteristics with Polarimetric SAR and Optical Remote Sensing. NASA Applied Remote Sensing Training Program (ARSET).  
+- ESA. (2023). SNAP - ESA Sentinel Application Platform [Computer Software].  
+- Pottier, E., & Ferro-Famil, L. (2012). PolSARPro V5.0: An ESA educational toolbox used for self-education in the field of POLSAR and POL-INSAR data analysis. 2012 IEEE International Geoscience and Remote Sensing Symposium, 7377–7380. https://doi.org/10.1109/IGARSS.2012.6351925 
+- RStudio Team. (2024). RStudio: Integrated Development for R. (URL http://www.rstudio.com/). RStudio, PBC.  
+
 
 ---
 
