@@ -173,7 +173,7 @@ The .hdr file output from the SNAP process contains the geospatial information f
 
 ## Acknowledgements
 
-(Include any acknowledgments here)
+The authors would like to acknowledge the invaluable contributions of the open source community, whose efforts and resources have been instrumental in enabling this research.
 
 ---
 
