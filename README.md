@@ -102,7 +102,7 @@ The imagery collection duration was set from June 10, 2021, to July 30, 2021. Le
 
 ### Generate the Base Graph (within SNAP)
 
-Sample base-graph provided is generated as follows.
+***Sample base-graph used for this test study provided is available within the 'base_graph' folder.*** 
 
 1. Launch the SNAP software and import a single S1 image (zip file) into its interface.
 2. Generate a sample graph with the required processing methods in the proper order:
