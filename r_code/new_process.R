@@ -1,3 +1,5 @@
+"Set up a base working directory and download the three folders from the GitHub"
+
 
 
 "############################# Stage 3.1 ###########################################"
@@ -5,9 +7,12 @@
 
 library(xml2)
 
-# Directory of the project
+# Directory of the project 
+"Replace this path with the base working directory you created" 
 base_wd <- "F:\\S1_SNAP_Polsar\\" 
 
+
+"Run the Script"
 
 #  Directory to the s1 zip files 
 zip_wd <- paste0(base_wd, "s1_slc_files\\")
@@ -39,10 +44,11 @@ s1_zip_list <- list.files(paste0(zip_wd), glob2rx("*.zip$"), full.names = TRUE)
 IW_number = list("IW1", "IW2", "IW3")
 
 
+"#######################  Step 02 A : SNAP Processing  #######################"
 
 
-"############################# Stage 3.2 ###########################################"
-"Preparing IW graph"
+"####################################################"
+"Generate Graphs for Each S1 File (within R)"
 
 # Load necessary libraries
 library(xml2)
@@ -122,7 +128,7 @@ for (file in s1_zip_list){
 
 
 
-"############################# Stage 3.3 ###########################################"
+"####################################################"
 "Batch processing of SNAP graphs"
 
 # Load necessary library for parallel processing
@@ -134,6 +140,8 @@ cores_nr <- 2
 # Get the list of newly created SNAP processing graphs
 iw_graph_list_new <- list.files(out_graph_path,
                                 glob2rx("*.xml$"), full.names = TRUE)
+
+iw_graph_list_new <- iw_graph_list_new[1:4]
 
 # Initialize parallel processing with the specified number of cores
 parallelMap::parallelStartSocket(cores_nr)
@@ -157,7 +165,10 @@ gc();gc()
 
 
 
-"############################# Stage 4.1 ###########################################"
+"#######################  Step 02 B : PolSARpro Processing  #######################"
+
+
+"####################################################"
 "Data configuration"
 "Edit the config.txt file > 'dual' to 'pp2'"
 
@@ -182,7 +193,7 @@ for (file in file_list) {
 
 
 
-"############################# Stage 4.2 ###########################################"
+"####################################################"
 "Generation of C2 folder and preserving geo-spatial information"
 
 # Assign cores for parallalization
@@ -237,10 +248,7 @@ parallelMap::parallelStop()
 
 
 
-
-
-
-"############################# Stage 4.3 ###########################################"
+"####################################################"
 "Generating PolSARpro parameters"
 
 
@@ -263,7 +271,7 @@ parallelMap::parallelLibrary("raster")
 parallelMap::parallelLapply(file_list, function (file_c2_folder){
   
   
-  # 4.3.1 Extract information from config.txt file
+  #  Extract information from config.txt file
   row_col <- as.integer(readLines(paste0(file_c2_folder, "/config.txt"))[c(2, 5)]) # Get the number of rows and columns 
   idf_string <- "C2" #  input data format
   ofr_int <- 0 #  Offset Row
@@ -272,7 +280,7 @@ parallelMap::parallelLapply(file_list, function (file_c2_folder){
   fnc_int <- row_col[2] # Final Number of Col
   
   
-  # 4.2.2 Create mask valid pixels
+  #  Create mask valid pixels
   cmd_string_mask <- paste0('create_mask_valid_pixels',
                             ' -id ', file_c2_folder,
                             ' -od ', file_c2_folder,
@@ -286,7 +294,7 @@ parallelMap::parallelLapply(file_list, function (file_c2_folder){
   
   
   
-  # 4.2.3 Create mask BMP file 
+  # Create mask BMP file 
   # Get the mask file created in previous step (3.1)
   mask_file <- paste0(file_c2_folder, "/mask_valid_pixels.bin")
   cmd_string_bmp <- paste0('create_bmp_file -mcol black -if "', mask_file, '"',
@@ -299,7 +307,7 @@ parallelMap::parallelLapply(file_list, function (file_c2_folder){
   
   
   
-  # 4.2.4 Process parameters
+  #  Process parameters
   
   # Create a file to save any errors
   err_string <- paste0(dirname(file_c2_folder), "/MemoryAllocError.txt")
@@ -375,8 +383,8 @@ parallelMap::parallelStop()
 
 
 
-"############################# Stage 4.4 ###########################################"
-"4.3 Generate ENVI (.HDR) Files "
+"####################################################"
+" Generate ENVI (.HDR) Files "
 
 # Load necessary library for raster operations
 library(raster)
@@ -421,8 +429,8 @@ for (folder in folder_list){
 
 
 
-"############################# Stage 4.5 ###########################################"
-" 4.4 Generate raster files for each parameter "
+"####################################################"
+" Generate raster files for each parameter "
 
 # Load necessary libraries
 library(parallelMap)
@@ -535,18 +543,3 @@ beep()
 
 "###############################################################################"
 "###############################################################################"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
