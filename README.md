@@ -12,7 +12,21 @@
 
 ---
 
-## Step 1: Installation and Configuration of Software
+
+## This repository contains three main folders. Download all three folders to your computer. 
+   - `r_code` 
+   - `base_graph`
+   - `s1_slc_files` 
+
+1. First install and configure all the software as described in the document below **(Step 00)**.  
+
+2. Run the python script in the `s1_slc_files` folder. This should download all the S1 SLC files. Move all the downloaded S1 SLC files to the `s1_slc_files` folder.  
+
+3. Run the r script in the `r_code` folder. This script will automatically process the data using SNAP and PolSARpro, and it should output all the necessary parameters to a new folder named **tiff_folder**. The details and explanation of the R script are provided below.
+
+
+
+## Step 00 : Installation and Configuration of Software
 
 ### Installing Python
 
@@ -34,12 +48,21 @@ RStudio is an integrated development environment (IDE) for R.
    - Visit the [RStudio downloads page](https://www.rstudio.com/products/rstudio/download/).
    - Download the appropriate version for your operating system.
    - Run the installer and follow the prompts.
-   - After installation, open RStudio and verify it by running a simple R command like `print("RStudio is installed")`.
-3. Configure R by adding it to your system's PATH environment variable: 
-   - Navigate to the installation directory, typically `C:\Programs\R\bin`.
-   - Access system properties by searching for "edit the system variables" and, with administrative privileges, open the Environment Variables panel.
-   - In the System Variables section, locate and double-click the "PATH" variable to open the Edit Environment Variable panel.
-   - Click "New" and add the path to R's bin directory. Click "OK" to save the changes.
+   - After installation, open RStudio and verify it by running a simple R command like `print("RStudio is installed")`.  
+
+3. Configure R by adding it to your system's PATH environment variable:  
+
+   a) **Open file explorer** and navigate to the installation directory of R. This is typically located at `C:\Programs\R\bin`. Copy this path.    
+ 
+   b) Search for **edit the system environment variables** on your **Start menu**. Open the window with ***administrative privileges***. This will open **System Properties** window.   
+
+   c) Click on the **Environment variables** panel on the **System Properties** window.   
+
+   d) In the **System Variables** section, locate and double-click the **PATH** variable. This will open the **Edit Environment Variable panel**. 
+  
+   e) Click **New** and add the path (which you copied in step a) to R's bin directory. Click **OK** to save the changes. 
+
+
 
 
 ### Installing SNAP
@@ -49,11 +72,19 @@ SNAP (Sentinel Application Platform) is a common architecture for all Sentinel T
 1. Visit the [SNAP download page](http://step.esa.int/main/download/).
 2. Download the installer suitable for your operating system (Windows, macOS, or Linux).
 3. Run the installer and follow the prompts to complete the installation.
+
 4. Configure SNAP by adding it to your system's PATH environment variable:
-   - Navigate to the installation directory, typically `C:\Programs\snap\bin`.
-   - Access system properties by searching for "edit the system variables" and, with administrative privileges, open the Environment Variables panel.
-   - In the System Variables section, locate and double-click the "PATH" variable to open the Edit Environment Variable panel.
-   - Click "New" and add the path to SNAP's bin directory. Click "OK" to save the changes.
+
+   a) **Open file explorer** and navigate to the installation directory of SNAP. This is typically located at `C:\Programs\snap\bin`. Copy this path.
+
+   b) Search for **edit the system environment variables** on your **Start menu**. Open the window with ***administrative privileges***. This will open the **System Properties** window.
+
+   c) Click on the **Environment variables** panel on the **System Properties** window.
+
+   d) In the **System Variables** section, locate and double-click the **PATH** variable. This will open the **Edit Environment Variable panel**.
+
+   e) Click **New** and add the path (which you copied in step a) to SNAP's bin directory. Click **OK** to save the changes.
+
 5. Verify the installation by opening a command line and typing `gpt`. You should see a list of SNAP functions and tools.
 
 
@@ -72,22 +103,43 @@ PolSARpro (Polarimetric SAR Data Processing and Educational Tool) is used for pr
 1. Visit the [PolSARpro download page](https://www.ietr.fr/polsarpro-bio/).
 2. Download the appropriate version for your operating system.
 3. Extract the downloaded files to a directory of your choice.
-4. Follow the installation instructions provided in the user manual included in the download.
+4. Follow the installation instructions provided in the user manual included in the download.  
 5. Configure PolSARpro by adding it to your system's PATH environment variable:
-   - Navigate to the PolSARpro installation directory and copy three paths typically located in  
-   ***a) C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\tools***  
-   ***b) C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\bmp_process***  
-   ***c) C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\data_process_sngl***  
-   - Access system properties by searching for "edit the system variables" and, with administrative privileges, open the Environment Variables panel.
-   - In the System Variables section, locate and double-click the "PATH" variable to open the Edit Environment Variable panel.
-   - Click "New" and add the three paths copied above. Click "OK" to save the changes.
-6. Verify the installation by opening a command line and changing directory to one of the above paths and a sample tool.  
- ***C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\tools>check_binary_data_file.exe***  
-  Ensure the command executes without errors.
+
+   a) **Open file explorer** and navigate to the PolSARpro installation directory. Copy the following three paths:
+   
+   - `C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\tools`
+   - `C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\bmp_process`
+   - `C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\data_process_sngl`
+
+   b) Search for **edit the system environment variables** on your **Start menu**. Open the window with ***administrative privileges***. This will open the **System Properties** window.
+
+   c) Click on the **Environment variables** panel on the **System Properties** window.
+
+   d) In the **System Variables** section, locate and double-click the **PATH** variable. This will open the **Edit Environment Variable panel**.
+
+   e) Click **New** and add each of the three paths (which you copied in step a). Click **OK** to save the changes.
+
+6. Verify the installation by opening a command line and changing directory to one of the paths and running a sample tool. For example, navigate to:
+
+   ```
+   C:\Program Files (x86)\PolSARpro_v6.0.3_Biomass_Edition\Soft\bin\tools
+   ```
+
+   and run:
+
+   ```
+   check_binary_data_file.exe
+   ```
+
+   Ensure the command executes without errors.
 
 ---
 
-## Step 2: Bulk Download of Sentinel-1 SLC Images
+
+---
+
+## Step 01 : Python Script - Bulk Download of Sentinel-1 SLC Images
 
 ***Python script used to download the images for this test study is available within the 's1_slc_files' folder.***  
 
@@ -98,7 +150,8 @@ The imagery collection duration was set from June 10, 2021, to July 30, 2021. Le
 ---
 
 
-## Step 3: SNAP Processing
+## Step 02: R Script 
+## Step 02 A : SNAP Processing
 
 ### Generate the Base Graph (within SNAP)
 
@@ -122,24 +175,24 @@ The imagery collection duration was set from June 10, 2021, to July 30, 2021. Le
 
 Generate corresponding SNAP (.xml) graphs for each S1 zip file using the base graph provided. This process results in the creation of 27 SNAP graphs (3 graphs per Sentinel file), representing each combination of the nine zip files and three IW graphs. 
 
-### Batch Processing (within R)
+### Batch processing of SNAP graphs
 
 Utilizing the processing capabilities of the computer, batch processing of the graphs can be performed efficiently within R. By assigning an optimal number of cores (e.g., n=5), the library `parallelMap` in R can be employed to concurrently process five graphs in parallel. This approach maximizes computational efficiency and minimizes processing time.
 
 ---
 
-## Step 4: PolSARpro Processing (within R)
+## Step 02 B : PolSARpro Processing
 
-### Edit config file
+### Data configuration. Edit the config.txt file > 'dual' to 'pp2'
+
 The SNAP software generates C2 matrix output in the form of .bin files, essential for PolSARpro processing. The configuration file, `config.txt`, must be edited to replace the parameter "dual" with "pp2" to ensure compatibility with PolSARpro. 
 
-### Move to C2 folder
+### Generation of C2 folder and preserving geo-spatial information
 Generate a C2 folder and move all the processed files from SNAP to the folder.
 
-### Extract Geo Reference Data
 The C11.bin file contains the spatial information required for generating the TIFF file (raster). Store this information and generate a reference TIFF file to be later used in generating other parameters.
 
-### Process SAR parameters
+### Generating PolSARpro parameters
 
 #### Extract information from config.txt file  
 
@@ -164,7 +217,7 @@ The config.txt file contains essential metadata crucial for subsequent parameter
 
 The .hdr file output from the SNAP process contains the geospatial information for each particular IW swath. Using the `C11.hdr` file, create reference .tif files to preserve the geospatial information.
 
-### Create Raster Files
+### Generate raster files for each parameter
 
 1. Use the extracted spatial information to create raster files that retain the accurate geospatial information.
 2. These raster files will be used as reference points for further processing within PolSARpro to ensure spatial accuracy.
@@ -186,4 +239,3 @@ The authors would like to acknowledge the invaluable contributions of the open s
 
 
 ---
-
